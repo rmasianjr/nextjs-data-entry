@@ -1,5 +1,5 @@
 export const localStorageUtil = {
-  saveData(key: string, data: any) {
+  saveData(key: string, data: object) {
     const existingData = JSON.parse(localStorage.getItem(key) || "[]");
     existingData.unshift(data);
     localStorage.setItem(key, JSON.stringify(existingData));

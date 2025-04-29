@@ -6,7 +6,7 @@ export default function NotFound() {
       <FaceFrownIcon className="w-10 text-gray-400 mb-3" />
       <h2 className="text-xl font-semibold mb-3">404 Not Found</h2>
       <p className="text-gray-700 mb-8">
-        Oops! We couldn't find the page you were looking for.
+        Oops! We couldn&apos;t find the page you were looking for.
       </p>
     </div>
   );

@@ -14,7 +14,7 @@ export default async function DetailsPage({
 }: {
   searchParams: SearchParams;
 }) {
-  const isEmpty = (obj: Object) => Object.keys(obj).length === 0;
+  const isEmpty = (obj: object) => Object.keys(obj).length === 0;
 
   const query = await searchParams;
 
