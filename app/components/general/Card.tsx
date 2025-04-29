@@ -23,21 +23,25 @@ export default function Card({ details }: { details: Details }) {
         <h5 className="font-semibold text-gray-900 text-base md:text-xl mb-1">
           {name}
         </h5>
-        <span className="text-sm md:text-base text-gray-600 mb-3">
+        <span className="text-sm text-gray-600 mb-5 text-center">
           {age} years old
         </span>
-        <div>
-          <div className="flex mb-3">
-            <EnvelopeIcon className="mr-2 w-5 h-5 text-gray-600" />
-            <span className="text-sm text-gray-600">{email}</span>
+        <div className="text-center">
+          <div className="flex justify-center items-center mb-3">
+            <EnvelopeIcon className="mr-2 w-5 h-5 text-blue-600" />
+            <span className="text-sm md:text-base text-gray-600">{email}</span>
           </div>
-          <div className="flex mb-3">
-            <PhoneIcon className="mr-2 w-5 h-5 text-gray-600" />
-            <span className="text-sm text-gray-600">{contact}</span>
+          <div className="flex justify-center items-center mb-3">
+            <PhoneIcon className="mr-2 w-5 h-5 text-blue-600" />
+            <span className="text-sm md:text-base text-gray-600">
+              {contact}
+            </span>
           </div>
-          <div className="flex">
-            <MapPinIcon className="mr-2 w-5 h-5 text-gray-600" />
-            <span className="text-sm text-gray-600">{address}</span>
+          <div className="flex justify-center ">
+            <MapPinIcon className="mr-2 w-5 h-5 text-blue-600" />
+            <span className="text-sm md:text-base text-gray-600">
+              {address}
+            </span>
           </div>
         </div>
       </div>
