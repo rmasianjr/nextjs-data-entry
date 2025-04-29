@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function CreatePage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     age: "",
@@ -24,6 +26,8 @@ export default function CreatePage() {
 
     const queryString = new URLSearchParams(formData).toString();
     console.log(queryString);
+
+    router.push(`/details/results?${queryString}`);
   };
 
   return (
