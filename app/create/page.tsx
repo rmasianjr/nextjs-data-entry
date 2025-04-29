@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { localStorageUtil } from "../lib/localStorageUtil";
 
 export default function CreatePage() {
   const router = useRouter();
@@ -24,9 +25,9 @@ export default function CreatePage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const queryString = new URLSearchParams(formData).toString();
-    console.log(queryString);
+    localStorageUtil.saveData("formData", formData);
 
+    const queryString = new URLSearchParams(formData).toString();
     router.push(`/details/results?${queryString}`);
   };
 
