@@ -2,7 +2,11 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { localStorageUtil } from "../lib/localStorageUtil";
+// import { localStorageUtil } from "../lib/localStorageUtil";
+
+// testing firebase
+import db from "../lib/firebase/firebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function CreatePage() {
   const router = useRouter();
@@ -24,11 +28,18 @@ export default function CreatePage() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    localStorageUtil.saveData("formData", formData);
+    // localStorageUtil.saveData("formData", formData);
+    try {
+      const collectionRef = collection(db, "details");
+      const docRef = await addDoc(collectionRef, formData);
+      console.log(docRef.id);
+    } catch (error) {
+      console.log(error);
+    }
 
     const queryString = new URLSearchParams(formData).toString();
     router.push(`/details/results?${queryString}`);
