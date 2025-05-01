@@ -1,53 +1,10 @@
-"use client";
-
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-// import { localStorageUtil } from "../lib/localStorageUtil";
-
-// testing firebase
-import db from "../lib/firebase/firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
+import { createInfo } from "../lib/actions";
 
 export default function CreatePage() {
-  const router = useRouter();
-  const [formData, setFormData] = useState({
-    name: "",
-    age: "",
-    email: "",
-    contact: "",
-    address: "",
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // localStorageUtil.saveData("formData", formData);
-    try {
-      const collectionRef = collection(db, "infos");
-      await addDoc(collectionRef, formData);
-    } catch (error) {
-      console.log(error);
-    }
-
-    const queryString = new URLSearchParams(formData).toString();
-    router.push(`/details/results?${queryString}`);
-  };
-
   return (
     <form
       className="max-w-sm md:max-w-2/6 mx-auto p-5 my-5 bg-white border border-gray-200 rounded-lg shadow-md"
-      onSubmit={handleSubmit}
+      action={createInfo}
     >
       <div className="mb-5">
         <label
@@ -61,8 +18,6 @@ export default function CreatePage() {
           type="text"
           id="name"
           name="name"
-          value={formData.name}
-          onChange={handleChange}
           required
         />
       </div>
@@ -78,8 +33,6 @@ export default function CreatePage() {
           type="number"
           id="age"
           name="age"
-          value={formData.age}
-          onChange={handleChange}
           required
         />
       </div>
@@ -95,8 +48,6 @@ export default function CreatePage() {
           type="email"
           id="email"
           name="email"
-          value={formData.email}
-          onChange={handleChange}
           required
         />
       </div>
@@ -112,8 +63,6 @@ export default function CreatePage() {
           type="tel"
           id="contact"
           name="contact"
-          value={formData.contact}
-          onChange={handleChange}
           required
         />
       </div>
@@ -129,17 +78,14 @@ export default function CreatePage() {
           type="text"
           id="address"
           name="address"
-          value={formData.address}
-          onChange={handleChange}
           required
         />
       </div>
       <button
         className="text-center text-sm font-medium text-white bg-blue-700 px-5 py-2.5 rounded-lg focus:outline-blue-300 hover:bg-blue-800"
         type="submit"
-        disabled={isSubmitting}
       >
-        {isSubmitting ? "Submitting..." : "Submit"}
+        Submit
       </button>
     </form>
   );
