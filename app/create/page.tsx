@@ -34,9 +34,8 @@ export default function CreatePage() {
 
     // localStorageUtil.saveData("formData", formData);
     try {
-      const collectionRef = collection(db, "details");
-      const docRef = await addDoc(collectionRef, formData);
-      console.log(docRef.id);
+      const collectionRef = collection(db, "infos");
+      await addDoc(collectionRef, formData);
     } catch (error) {
       console.log(error);
     }

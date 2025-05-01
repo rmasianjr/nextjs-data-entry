@@ -6,11 +6,11 @@ import {
 } from "@heroicons/react/24/outline";
 
 type Details = {
-  name: string;
-  age: string;
-  email: string;
-  contact: string;
-  address: string;
+  name?: string;
+  age?: string;
+  email?: string;
+  contact?: string;
+  address?: string;
 };
 
 export default function Card({ details }: { details: Details }) {
