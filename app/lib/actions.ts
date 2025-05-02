@@ -5,6 +5,7 @@ import db from "./firebase/firebaseConfig";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { toProperCase } from "./utils";
 
 const FormSchema = z.object({
   id: z.string(),
@@ -14,7 +15,8 @@ const FormSchema = z.object({
       required_error: "Name is required",
     })
     .trim()
-    .min(2, { message: "Name must be at least 2 characters long" }),
+    .min(2, { message: "Name must be at least 2 characters long" })
+    .transform(toProperCase),
   age: z.coerce
     .number({
       invalid_type_error: "Please enter a valid number of age",
@@ -40,7 +42,8 @@ const FormSchema = z.object({
       required_error: "Address is required",
     })
     .trim()
-    .min(1, { message: "Address cannot be empty" }),
+    .min(1, { message: "Address cannot be empty" })
+    .transform(toProperCase),
 });
 
 const CreateInfo = FormSchema.omit({ id: true });
