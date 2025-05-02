@@ -1,10 +1,16 @@
-import { createInfo } from "../lib/actions";
+"use client";
+
+import { useActionState } from "react";
+import { createInfo, State } from "../lib/actions";
 
 export default function CreatePage() {
+  const initialState: State = { message: null, errors: {} };
+  const [state, formAction] = useActionState(createInfo, initialState);
+
   return (
     <form
       className="max-w-sm md:max-w-2/6 mx-auto p-5 my-5 bg-white border border-gray-200 rounded-lg shadow-md"
-      action={createInfo}
+      action={formAction}
     >
       <div className="mb-5">
         <label
@@ -18,8 +24,14 @@ export default function CreatePage() {
           type="text"
           id="name"
           name="name"
-          required
+          defaultValue=""
         />
+        {state.errors?.name &&
+          state.errors.name.map((error: string) => (
+            <p className="mt-1 text-xs text-red-500" key={error}>
+              {error}
+            </p>
+          ))}
       </div>
       <div className="mb-5">
         <label
@@ -33,8 +45,14 @@ export default function CreatePage() {
           type="number"
           id="age"
           name="age"
-          required
+          defaultValue=""
         />
+        {state.errors?.age &&
+          state.errors.age.map((error: string) => (
+            <p className="mt-1 text-xs text-red-500" key={error}>
+              {error}
+            </p>
+          ))}
       </div>
       <div className="mb-5">
         <label
@@ -48,8 +66,14 @@ export default function CreatePage() {
           type="email"
           id="email"
           name="email"
-          required
+          defaultValue=""
         />
+        {state.errors?.email &&
+          state.errors.email.map((error: string) => (
+            <p className="mt-1 text-xs text-red-500" key={error}>
+              {error}
+            </p>
+          ))}
       </div>
       <div className="mb-5">
         <label
@@ -63,8 +87,14 @@ export default function CreatePage() {
           type="tel"
           id="contact"
           name="contact"
-          required
+          defaultValue=""
         />
+        {state.errors?.contact &&
+          state.errors.contact.map((error: string) => (
+            <p className="mt-1 text-xs text-red-500" key={error}>
+              {error}
+            </p>
+          ))}
       </div>
       <div className="mb-5">
         <label
@@ -78,11 +108,20 @@ export default function CreatePage() {
           type="text"
           id="address"
           name="address"
-          required
+          defaultValue=""
         />
+        {state.errors?.address &&
+          state.errors.address.map((error: string) => (
+            <p className="mt-1 text-xs text-red-500" key={error}>
+              {error}
+            </p>
+          ))}
+      </div>
+      <div className="mb-1 text-xs text-red-500">
+        <p>{state.message}</p>
       </div>
       <button
-        className="text-center text-sm font-medium text-white bg-blue-700 px-5 py-2.5 rounded-lg focus:outline-blue-300 hover:bg-blue-800"
+        className="mt-1 text-center text-sm font-medium text-white bg-blue-700 px-5 py-2.5 rounded-lg focus:outline-blue-300 hover:bg-blue-800"
         type="submit"
       >
         Submit
