@@ -5,7 +5,10 @@ import { createInfo, State } from "../lib/actions";
 
 export default function CreatePage() {
   const initialState: State = { message: null, errors: {} };
-  const [state, formAction] = useActionState(createInfo, initialState);
+  const [state, formAction, isPending] = useActionState(
+    createInfo,
+    initialState
+  );
 
   return (
     <form
@@ -121,10 +124,18 @@ export default function CreatePage() {
         <p>{state.message}</p>
       </div>
       <button
-        className="mt-1 text-center text-sm font-medium text-white bg-blue-700 px-5 py-2.5 rounded-lg focus:outline-blue-300 hover:bg-blue-800"
+        className="mt-1 text-center text-sm font-medium text-white bg-blue-700 px-5 py-2.5 rounded-lg focus:outline-blue-300 hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
         type="submit"
+        disabled={isPending}
       >
-        Submit
+        {isPending ? (
+          <div className="flex items-center justify-center">
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+            Submitting...
+          </div>
+        ) : (
+          "Submit"
+        )}
       </button>
     </form>
   );
