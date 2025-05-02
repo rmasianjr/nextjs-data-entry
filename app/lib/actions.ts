@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import db from "./firebase/firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -22,7 +22,10 @@ export async function createInfo(formData: FormData) {
 
   try {
     const collectionRef = collection(db, "infos");
-    await addDoc(collectionRef, parsedInfo);
+    await addDoc(collectionRef, {
+      ...parsedInfo,
+      createdAt: serverTimestamp(),
+    });
   } catch (error) {
     console.log(error);
   }

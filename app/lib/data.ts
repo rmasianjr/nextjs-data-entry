@@ -1,10 +1,11 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import db from "./firebase/firebaseConfig";
 
 export async function fetchInfos() {
   try {
-    // await new Promise((resolve) => setTimeout(resolve, 8000)); // test suspense
-    const querySnapshot = await getDocs(collection(db, "infos"));
+    const infosCollection = collection(db, "infos");
+    const q = query(infosCollection, orderBy("createdAt", "desc"));
+    const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Database Error:", error);
