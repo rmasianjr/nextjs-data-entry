@@ -27,7 +27,8 @@ export async function createInfo(formData: FormData) {
       createdAt: serverTimestamp(),
     });
   } catch (error) {
-    console.log(error);
+    console.error("Database Error:", error);
+    throw new Error("Failed to create info");
   }
 
   const queryString = new URLSearchParams(
