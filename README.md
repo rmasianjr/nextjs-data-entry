@@ -1,3 +1,30 @@
+## Nextjs Data Entry
+
+This project aims to apply the concepts learned from Next.js by creating a simple web application.
+
+## Live Demonstration
+
+Live project link: <https://rocket-data-one.vercel.app/>
+
+## Screenshot
+
+![Project Screenshot](http://drive.google.com/thumbnail?id=1uLNwuzCEUznBM67PkOQY-yqdIMvgCw22&sz=w1000)
+
+## Tasks
+
+- [x] Create two pages: Data Input Page and Data Display Page
+
+- [x] Data Input Page: Accepts user data. You can decide what data you want to ask from the user. The data should be sent as query parameters to the second page.
+
+- [x] Data Display Page: Displays the data included in the query parameters.
+
+#### Added features
+
+- [x] Added a home page to display all the data that has been inputted.
+- [x] Used Firebase Firestore as a database for data persistence.
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
